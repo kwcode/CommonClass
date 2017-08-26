@@ -1,0 +1,48 @@
+﻿@using Model;
+@using UICommon;
+@{  
+    //二级导航栏_C
+    var UserID = Model.UserID;
+    List<UserNavigationBarEntity> NavList = DAL.UserNavigationBarDAL.GetList2("ID,OpenType,Title,Url,PageMenu1_Code,SubTitle", UserID);
+}
+
+<div class="ku-mk ku-mk10102">
+    @if (NavList != null && NavList.Count > 0)
+    {  
+        <div class="ku-mk-nav">
+            <ul class=" ku-nav clearfix">
+                @foreach (UserNavigationBarEntity item in NavList)
+                {
+                    <li>
+                        <a  title="@item.Title"   @(item.OpenType == 1 ? "target=\"_blank\"" : "")  href="@item.Url" >
+                            <div>@item.Title</div>
+                            <span>@item.SubTitle</span>
+                        </a>
+                        @if (item.PageMenu1_Code > 0)
+                        {
+                            UserPageMenu1Entity pageMenuEntity = DAL.UserPageMenu1DAL.Get_98(item.PageMenu1_Code, UserID, "SubMenuCode,IsSubMenu,ID");
+                            int IsSubMenu = pageMenuEntity.IsSubMenu;
+                            if (IsSubMenu == 1)//有下一级
+                            {
+                                //有下级检测 
+                                List<NavSubMenuEntity> subMenuList = NavHelper.GetSubMenuList(item.PageMenu1_Code, pageMenuEntity.SubMenuCode, UserID);
+                                if (subMenuList != null && subMenuList.Count > 0)
+                                {
+                            <div class="nav-sub-box">
+                                <div class="nav-sub">
+                                    @foreach (NavSubMenuEntity itemSub in subMenuList)
+                                    { 
+                                        <a @itemSub.Href title="@itemSub.Title">@itemSub.Title</a>
+                                    }
+                                </div>
+                            </div>
+                                }
+                            }
+                        }
+
+                    </li> 
+                }
+            </ul>
+        </div>
+    }
+</div>
