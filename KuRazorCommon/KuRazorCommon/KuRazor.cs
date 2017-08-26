@@ -78,16 +78,15 @@ namespace KuRazorCommon
 
         #endregion
 
-        #region 读取DLL文件模板的内容并编译生Html代码返回
+        #region 读取DLL模板文件的内容并编译生Html代码返回
         /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="model"></param>
-        /// <param name="dllPath"></param>
+        /// 读取DLL模板文件的内容并编译生Html代码返回Html代码
+        /// </summary> 
+        /// <param name="model">实体</param>
+        /// <param name="dllPath">dll完整的路径</param>
         /// <param name="isCache">是否缓存 false 每次都重新加载dll里面的内容</param>
         /// <returns></returns>
-        public static string GetRazorHtml<T>(T model, string dllPath, bool isCache)
+        public static string GetRazorHtml<T>(T model, string dllPath, bool isCache = true)
         {
             string html = string.Empty;
             ITemplate instance;
@@ -110,7 +109,7 @@ namespace KuRazorCommon
             else
             {
                 instance = GetDllITemplate(keyName, dllPath);
-                 
+
             }
             if (instance != null)
             {

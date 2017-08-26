@@ -96,10 +96,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\KuRazorCommon\KuRazorCommon.csproj">
       <Project>{2d1f29cc-7197-4f55-996c-309fce400126}</Project>
