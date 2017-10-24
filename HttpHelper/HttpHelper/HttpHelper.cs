@@ -8,8 +8,8 @@ using System.Text;
 
 public class HttpHelper
 {
-    private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
-
+    //private static readonly string DefaultUserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)";
+    private static readonly string DefaultUserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36";
     #region HttpGet
     /// <summary>
     /// 使用Get方法获取字符串结果（加入Cookie）
@@ -39,6 +39,7 @@ public class HttpHelper
             httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
             httpWebRequest.CookieContainer = cookieContainer;
             httpWebRequest.Method = "GET";
+            httpWebRequest.UserAgent = DefaultUserAgent;
             httpWebRequest.ServicePoint.ConnectionLimit = int.MaxValue;
             httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             Stream responseStream = httpWebResponse.GetResponseStream();
